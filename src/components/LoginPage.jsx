@@ -2,15 +2,18 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_BACKEND_URL } from "../utils/mockData";
 
 export default function Login() {
   const [emailId, setEmailId] = useState("sashankab@gmail.com");
   const [password, setPassword] = useState("Sashank@0404");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLoginClick = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4444/login",
+        BASE_BACKEND_URL + "/login",
         {
           emailId,
           password,
@@ -19,6 +22,7 @@ export default function Login() {
       );
       console.log(res.data);
       dispatch(addUser(res.data));
+      navigate("/feed");
     } catch (err) {
       console.error(err);
     }
