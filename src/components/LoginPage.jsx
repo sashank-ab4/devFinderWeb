@@ -8,6 +8,7 @@ import { BASE_BACKEND_URL } from "../utils/mockData";
 export default function Login() {
   const [emailId, setEmailId] = useState("sashankab@gmail.com");
   const [password, setPassword] = useState("Sashank@0404");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLoginClick = async () => {
@@ -24,7 +25,7 @@ export default function Login() {
       dispatch(addUser(res.data));
       navigate("/feed");
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data || "Please check your email or password!");
     }
   };
   return (
@@ -49,6 +50,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </fieldset>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-end mt-5">
             <button className="btn btn-primary" onClick={handleLoginClick}>
               Login
