@@ -20,7 +20,7 @@ export default function Login() {
         },
         { withCredentials: true },
       );
-      console.log(res.data);
+      //console.log(res.data);
       dispatch(addUser(res.data));
       navigate("/feed");
     } catch (err) {
@@ -29,10 +29,10 @@ export default function Login() {
   };
   return (
     <div className="flex justify-center my-10">
-      <div className="card bg-neutral text-neutral-content w-96">
+      <div className="card bg-gray-400 text-black w-96">
         <div className="card-body items-center text-center">
           <h2 className="card-title tracking-wider">devFinder</h2>
-          <p>Please login to Connect</p>
+          <p>Please Login to Connect</p>
           <fieldset className="fieldset">
             <legend className="fieldset-legend text-start ">Email</legend>
             <input
