@@ -1,7 +1,15 @@
+import { useSelector } from "react-redux";
+import ProfileEditor from "./ProfileEditor";
+
 export default function ProfileView() {
+  const user = useSelector((store) => store.user);
   return (
-    <div>
-      <h1>This is your profile!</h1>
-    </div>
+    user && (
+      <>
+        <div>
+          <ProfileEditor user={user} />
+        </div>
+      </>
+    )
   );
 }
