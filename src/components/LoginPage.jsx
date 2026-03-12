@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 
 export default function Login() {
-  const [emailId, setEmailId] = useState("sashankab@gmail.com");
-  const [password, setPassword] = useState("Sashank@0404");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,34 +29,77 @@ export default function Login() {
     }
   };
   return (
-    <div className="flex justify-center my-10">
-      <div className="card bg-gray-400 text-black w-96">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title tracking-wider">devFinder</h2>
-          <p>Please Login to Connect</p>
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend text-start ">Email</legend>
-            <input
-              type="text"
-              className="input"
-              value={emailId}
-              onChange={(e) => setEmailId(e.target.value)}
-            />
-            <legend className="fieldset-legend ">Password</legend>
-            <input
-              type="text"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </fieldset>
-          <p className="text-red-500">{error}</p>
-          <div className="card-actions justify-end mt-5">
-            <button className="btn btn-primary" onClick={handleLoginClick}>
-              Login
-            </button>
-          </div>
-        </div>
+    <div>
+      <div className="flex items-center justify-center h-full relative z-10">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="bg-[#e5e7e8] bg-opacity-75 p-10 rounded-md w-100 flex flex-col space-y-5"
+        >
+          <h1 className="text-3xl font-bold text-center">
+            {/* {isSignInForm ? "Sign In" : "Sign Up"} */}
+            devFinder
+          </h1>
+          <h2 className="text-center text-2xl -tracking-wider text-blue-400">
+            Log in to your account
+          </h2>
+          <p className="text-center font-semibold ">
+            Don't have an account ?{" "}
+            <a href="/" className="text-blue-500 hover:underline">
+              Sign Up
+            </a>
+            .
+          </p>
+
+          <input
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
+            type="text"
+            placeholder="Email"
+            className="p-3 rounded-md bg-white text-black placeholder-gray-00 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+            className="p-3 rounded-md bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          {/* <p className=" text-blue-500 text-lg py-2 font-bold text-center">
+            or
+          </p> */}
+          <button
+            onClick={handleLoginClick}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-3 cursor-pointer rounded-md font-semibold mt-2"
+          >
+            Login
+          </button>
+
+          {/* <p className="text-center text-gray-400">OR</p>
+
+          <button className="bg-gray-600 hover:bg-gray-500 py-3 rounded-md font-semibold">
+            Use a sign-in code
+          </button> */}
+
+          <p className="text-sm text-gray-400 text-center mt-4">
+            <p
+              /* onClick={signUpToggle} */
+              className="text-white hover:underline cursor-pointer"
+            >
+              {/* {isSignInForm
+                ? "New to Netflix? Sign Up Now"
+                : "Already an User ? Sign in Now"} */}
+            </p>
+          </p>
+
+          <p className="text-xs text-gray-500 mt-4 leading-5">
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot.{" "}
+            <a href="/" className="text-blue-500 hover:underline">
+              Learn more
+            </a>
+            .
+          </p>
+        </form>
       </div>
     </div>
   );

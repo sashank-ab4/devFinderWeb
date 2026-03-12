@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 import { removeUser } from "../utils/userSlice";
+import { GoPerson } from "react-icons/go";
 
 export default function Navbar() {
   //this down here is subscribing to the store
@@ -27,7 +28,7 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="relative navbar bg-base-300 shadow-sm">
       <div className="flex-1">
         <Link to={"/"} className="btn btn-ghost text-xl">
           devFinder
@@ -66,12 +67,9 @@ export default function Navbar() {
           </div>
         </div>
       ) : (
-        <div className=" mr-4">
-          <button
-            className="hover:border border-white cursor-pointer uppercase text-sm tracking-wide rounded-2xl"
-            onClick={handleLoginButton}
-          >
-            Login
+        <div className="tracking-wider">
+          <button className="btn btn-ghost" onClick={handleLoginButton}>
+            <GoPerson size={20} /> LOGIN
           </button>
         </div>
       )}
