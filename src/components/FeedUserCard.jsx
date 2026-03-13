@@ -1,5 +1,24 @@
+import { BASE_BACKEND_URL } from "../utils/mockData";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeProfileFromFeed } from "../utils/feedSlice";
+
 export default function FeedUserCard({ user }) {
-  const { firstName, lastName, age, about, gender } = user;
+  const { _id, firstName, lastName, age, about, gender } = user;
+  const dispatch = useDispatch();
+  const handleRequestsFromFeed = async (status, userId) => {
+    try {
+      const res = await axios.post(
+        BASE_BACKEND_URL + "/request/send/" + status + "/" + userId,
+        {},
+        { withCredentials: true },
+      );
+      console.log(res);
+      dispatch(removeProfileFromFeed(_id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden border">
       <div className="h-60 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
@@ -27,11 +46,17 @@ export default function FeedUserCard({ user }) {
         <p className="text-gray-600">{about}</p>
 
         <div className="flex justify-center gap-4 pt-3">
-          <button className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+          <button
+            onClick={() => handleRequestsFromFeed("ignored", _id)}
+            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+          >
             Ignore
           </button>
 
-          <button className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+          <button
+            onClick={() => handleRequestsFromFeed("interested", _id)}
+            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+          >
             Interested
           </button>
         </div>

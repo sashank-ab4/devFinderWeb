@@ -21,7 +21,7 @@ export default function Requests() {
       console.error("ERROR:" + err.message);
     }
   };
-  const handleRequests = async (status, _id) => {
+  const reviewRequests = async (status, _id) => {
     try {
       const response = await axios.post(
         BASE_BACKEND_URL + "/request/review/" + status + "/" + _id,
@@ -87,7 +87,7 @@ export default function Requests() {
 
               <div className="flex gap-3 mt-6">
                 <button
-                  onClick={() => handleRequests("rejected", request._id)}
+                  onClick={() => reviewRequests("rejected", request._id)}
                   className="
                 flex-1
                 border border-blue-400
@@ -104,7 +104,7 @@ export default function Requests() {
                 </button>
 
                 <button
-                  onClick={() => handleRequests("accepted", request._id)}
+                  onClick={() => reviewRequests("accepted", request._id)}
                   className="
                 flex-1
                 bg-blue-500

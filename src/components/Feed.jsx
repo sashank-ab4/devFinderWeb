@@ -17,7 +17,7 @@ export default function Feed() {
       const res = await axios.get(BASE_BACKEND_URL + "/feed", {
         withCredentials: true,
       });
-      console.log(res);
+
       feedUpdater(addFeed(res?.data?.data));
     } catch (err) {
       console.err(err.message);
@@ -27,6 +27,14 @@ export default function Feed() {
   useEffect(() => {
     getFeed();
   }, []);
+
+  if (!feed) return;
+  if (feed.length <= 0)
+    return (
+      <h1 className="text-center font-bold uppercase">
+        No new user's present in the feed!
+      </h1>
+    );
   return (
     <>
       <div className="flex justify-center mt-5">
@@ -45,7 +53,7 @@ export default function Feed() {
 
       {feed && (
         <div className="flex justify-center my-12">
-          <FeedUserCard user={feed[3]} />
+          <FeedUserCard user={feed[0]} />
         </div>
       )}
     </>
