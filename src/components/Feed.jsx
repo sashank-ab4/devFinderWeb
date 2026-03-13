@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import FeedUserCard from "./FeedUserCard";
+import { Link } from "react-router-dom";
 
 export default function Feed() {
-  //upater function
+  //updater function
   const feedUpdater = useDispatch();
   // subscribing to the store!
   const feed = useSelector((store) => store.feed);
@@ -27,10 +28,26 @@ export default function Feed() {
     getFeed();
   }, []);
   return (
-    feed && (
-      <div className="flex justify-center my-12">
-        <FeedUserCard user={feed[3]} />
+    <>
+      <div className="flex justify-center mt-5">
+        <ul className="menu menu-horizontal bg-base-200">
+          <li>
+            <Link to={"/feed"}>Feed</Link>
+          </li>
+          <li>
+            <Link to={"/connections"}>Connections</Link>
+          </li>
+          <li>
+            <Link to={"/requests"}>Requests</Link>
+          </li>
+        </ul>
       </div>
-    )
+
+      {feed && (
+        <div className="flex justify-center my-12">
+          <FeedUserCard user={feed[3]} />
+        </div>
+      )}
+    </>
   );
 }

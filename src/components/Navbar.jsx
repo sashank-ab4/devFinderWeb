@@ -28,7 +28,7 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="relative navbar bg-base-300 shadow-sm">
+    <div className="relative navbar bg-[#e5e7e8] shadow-sm">
       <div className="flex-1">
         <Link to={"/"} className="btn btn-ghost text-xl">
           devFinder
