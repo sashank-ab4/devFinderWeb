@@ -8,11 +8,15 @@ export default function Connections() {
   const connectionAdderFunction = useDispatch();
   const myConnections = useSelector((store) => store.connection);
   const fetchConnections = async () => {
-    const response = await axios.get(BASE_BACKEND_URL + "/user/connections", {
-      withCredentials: true,
-    });
-    console.log(response.data.data);
-    connectionAdderFunction(addConnection(response?.data?.data));
+    try {
+      const response = await axios.get(BASE_BACKEND_URL + "/user/connections", {
+        withCredentials: true,
+      });
+      console.log(response.data.data);
+      connectionAdderFunction(addConnection(response?.data?.data));
+    } catch (err) {
+      console.err("ERROR:" + err.message);
+    }
   };
   useEffect(() => {
     fetchConnections();
@@ -27,11 +31,14 @@ export default function Connections() {
         Connections{" "}
       </h1>
       {myConnections.map((connection) => {
-        const { photoUrl, firstName, lastName, age, gender, about } =
+        const { photoUrl, firstName, lastName, age, gender, about, _id } =
           connection;
         return (
           <>
-            <div className="card card-side bg-[#e5e7e8] shadow-sm border h-full w-100 mx-auto">
+            <div
+              key={_id}
+              className="card card-side bg-[#e5e7e8] shadow-sm border h-full w-100 mx-auto"
+            >
               <figure className="p-2 m-4">
                 <img
                   className="w-20 h-20"

@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 
 export default function Login() {
-  const [emailId, setEmailId] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailId, setEmailId] = useState("@gmail.com");
+  const [password, setPassword] = useState("@123");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,14 +30,14 @@ export default function Login() {
   };
   return (
     <div>
-      <div className="flex items-center justify-center h-full relative z-10">
+      <div className="flex items-center justify-center h-full relative z-10 mt-10">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="bg-[#e5e7e8] bg-opacity-75 p-10 rounded-md w-100 flex flex-col space-y-5"
         >
-          <h1 className="text-3xl font-bold text-center">
+          <h1 className="text-3xl font-bold text-center tracking-wider">
             {/* {isSignInForm ? "Sign In" : "Sign Up"} */}
-            devFinder
+            devTribe
           </h1>
           <h2 className="text-center text-2xl -tracking-wider text-blue-400">
             Log in to your account

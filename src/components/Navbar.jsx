@@ -31,7 +31,7 @@ export default function Navbar() {
     <div className="relative navbar bg-[#e5e7e8] shadow-sm">
       <div className="flex-1">
         <Link to={"/"} className="btn btn-ghost text-xl">
-          devFinder
+          devTribe
         </Link>
       </div>
       {user ? (
