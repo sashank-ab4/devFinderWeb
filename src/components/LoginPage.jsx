@@ -6,8 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 
 export default function Login() {
-  const [emailId, setEmailId] = useState("@gmail.com");
-  const [password, setPassword] = useState("@123");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isSigninForm, setIsSigninForm] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,6 +32,21 @@ export default function Login() {
       setError(err?.response?.data || "Please check your email or password!");
     }
   };
+
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post(
+        BASE_BACKEND_URL + "/signup",
+        { firstName, lastName, emailId, password, phoneNumber },
+        { withCredentials: true },
+      );
+      console.log(response);
+      dispatch(addUser(response?.data?.data));
+      navigate("/profile");
+    } catch (err) {
+      setError(err?.message?.message) || "Please check again!";
+    }
+  };
   return (
     <div>
       <div className="flex items-center justify-center h-full relative z-10 mt-10">
@@ -36,19 +55,50 @@ export default function Login() {
           className="bg-[#e5e7e8] bg-opacity-75 p-10 rounded-md w-100 flex flex-col space-y-5"
         >
           <h1 className="text-3xl font-bold text-center tracking-wider">
-            {/* {isSignInForm ? "Sign In" : "Sign Up"} */}
             devTribe
           </h1>
-          <h2 className="text-center text-2xl -tracking-wider text-blue-400">
-            Log in to your account
+          {isSigninForm && (
+            <p
+              onClick={() => setIsSigninForm((value) => !value)}
+              className="text-center text-2xl font-semibold "
+            >
+              First time here ?{" "}
+              <a href="/" className="text-blue-500 hover:underline">
+                Sign Up
+              </a>
+              .
+            </p>
+          )}
+
+          <h2 className="text-center text-xl  tracking-wide text-blue-400">
+            {isSigninForm ? "Create a new account" : "Log in to your account"}
           </h2>
-          <p className="text-center font-semibold ">
-            Don't have an account ?{" "}
-            <a href="/" className="text-blue-500 hover:underline">
-              Sign Up
-            </a>
-            .
-          </p>
+
+          {isSigninForm && (
+            <>
+              <input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="number"
+                placeholder="First Name"
+                className="p-3 rounded-md bg-white text-black placeholder-gray-00 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <input
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Last Name"
+                className="p-3 rounded-md bg-white text-black placeholder-gray-00 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                type="text"
+                placeholder="Phone Number"
+                className="p-3 rounded-md bg-white text-black placeholder-gray-00 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </>
+          )}
 
           <input
             value={emailId}
@@ -68,11 +118,12 @@ export default function Login() {
             or
           </p> */}
           <button
-            onClick={handleLoginClick}
+            onClick={isSigninForm ? handleSignIn : handleLoginClick}
             className="bg-blue-500 hover:bg-blue-600 text-white py-3 cursor-pointer rounded-md font-semibold mt-2"
           >
-            Login
+            {isSigninForm ? "Sign in" : "Login"}
           </button>
+          <p className="text-red-500 tracking-wide text-sm">{error}</p>
 
           {/* <p className="text-center text-gray-400">OR</p>
 
@@ -80,14 +131,14 @@ export default function Login() {
             Use a sign-in code
           </button> */}
 
-          <p className="text-sm text-gray-400 text-center mt-4">
+          <p className="text-md text-gray-400 text-center mt-2">
             <p
-              /* onClick={signUpToggle} */
-              className="text-white hover:underline cursor-pointer"
+              onClick={() => setIsSigninForm((value) => !value)}
+              className="text-blue-400 hover:underline cursor-pointer"
             >
-              {/* {isSignInForm
-                ? "New to Netflix? Sign Up Now"
-                : "Already an User ? Sign in Now"} */}
+              {isSigninForm
+                ? `Already an User ? Login now`
+                : `New to devTribe? Sign In now`}
             </p>
           </p>
 
