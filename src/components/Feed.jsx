@@ -31,12 +31,32 @@ export default function Feed() {
   if (!feed) return;
   if (feed.length <= 0)
     return (
-      <h1 className="text-center font-bold uppercase">
-        No new user's present in the feed!
+      <h1 className="text-center font-mono ">
+        Refresh the Feed for more Users!
       </h1>
     );
   return (
     <>
+      {feed && (
+        <div className="flex justify-center my-10">
+          <span className="text-2xl md:text-3xl font-semibold tracking-wide text-center">
+            The Hub for{" "}
+            <span className="text-rotate">
+              <span>
+                <span className="bg-teal-400 text-teal-900 px-2 rounded">
+                  Designers
+                </span>
+                <span className="bg-red-400 text-red-900 px-2 rounded">
+                  Developers
+                </span>
+                <span className="bg-blue-400 text-blue-900 px-2 rounded">
+                  Coders
+                </span>
+              </span>
+            </span>
+          </span>
+        </div>
+      )}
       {feed && (
         <div className="flex justify-center my-12">
           <FeedUserCard user={feed[0]} />

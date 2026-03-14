@@ -23,13 +23,17 @@ export default function Connections() {
   }, []);
 
   if (!myConnections) return;
-  if (myConnections.length === 0) return <h1>No Connections Found!</h1>;
+
   return (
     <div>
-      <h1 className="text-center my-10 font-bold uppercase tracking-wider text-xl">
-        Connections
+      <h1 className="text-center my-10 font-bold uppercase tracking-wider text-2xl">
+        {myConnections.length === 0
+          ? "You haven't made any connections yet!"
+          : "Connections"}
       </h1>
-
+      <h3 className="text-center mb-4 font-mono text-lg">
+        Discover more about your Developer Tribe!
+      </h3>
       <div className="max-w-2xl mx-auto space-y-4">
         {myConnections.map((connection) => {
           const { photoUrl, firstName, lastName, about, skills, _id } =

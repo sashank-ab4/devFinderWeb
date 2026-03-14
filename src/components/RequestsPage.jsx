@@ -39,17 +39,19 @@ export default function Requests() {
   }, []);
 
   if (!myRequests) return;
-  if (myRequests.length === 0)
-    return (
-      <h1 className="text-center font-bold uppercase my-5">
-        No Requests Present!
-      </h1>
-    );
+
   return (
-    <div className="min-h-screen bg-white p-6">
-      <h1 className="text-3xl font-bold text-blue-500 mb-8 text-center">
-        My Requests
+    <div className="min-h-screen bg-white p-6 ">
+      <h1 className="text-xl font-semibold text-black mb-5  text-center">
+        {myRequests.length === 0
+          ? "You don't have any connection requests yet"
+          : "Requests"}
       </h1>
+      {myRequests > 0 && (
+        <h3 className="text-lg font-mono text-black mb-6 text-center">
+          Accept the Tribe, to Connect and Explore!
+        </h3>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {myRequests.map((request) => {
@@ -59,7 +61,7 @@ export default function Requests() {
           return (
             <div
               key={_id}
-              className="bg-[#e5e7e8] rounded-2xl shadow-md p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              className="bg-[#ddedf5] rounded-2xl shadow-md p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               <div>
                 <img
@@ -68,7 +70,7 @@ export default function Requests() {
                     "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                   }
                   alt="Profile"
-                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-400 mb-3"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-300 mb-3"
                 />
                 <h2 className="text-xl font-semibold text-black">
                   {firstName} {lastName}
@@ -117,7 +119,7 @@ export default function Requests() {
                 cursor-pointer
               "
                 >
-                  Accepted
+                  Accept
                 </button>
               </div>
             </div>
