@@ -7,6 +7,7 @@ import { BASE_BACKEND_URL } from "../utils/mockData";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import HeroSection from "./HeroSection";
+import MiddleSection from "./MiddleSection";
 
 export default function MainBody() {
   // this is dispatch which will update the store so i named it updating function for awareness
@@ -42,6 +43,7 @@ export default function MainBody() {
           <Outlet />
         </main>
         {isHomePage && <HeroSection />}
+        {isHomePage && <MiddleSection />}
         {isHomePage && <Footer />}
       </div>
     </>

@@ -28,10 +28,10 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="relative navbar bg-[#e5e7e8] shadow-sm">
+    <div className="relative navbar text-black bg-[#9fd7ef] shadow-sm">
       <div className="flex-1">
         <Link to={"/"} className="btn btn-ghost text-xl">
-          devTribe
+          DevTribe
         </Link>
       </div>
       {user ? (
