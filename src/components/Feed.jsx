@@ -37,20 +37,6 @@ export default function Feed() {
     );
   return (
     <>
-      <div className="flex justify-center mt-5">
-        <ul className="menu menu-horizontal bg-base-200">
-          <li>
-            <Link to={"/feed"}>Feed</Link>
-          </li>
-          <li>
-            <Link to={"/connections"}>Connections</Link>
-          </li>
-          <li>
-            <Link to={"/requests"}>Requests</Link>
-          </li>
-        </ul>
-      </div>
-
       {feed && (
         <div className="flex justify-center my-12">
           <FeedUserCard user={feed[0]} />

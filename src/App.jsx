@@ -8,6 +8,7 @@ import Feed from "./components/Feed";
 import ProfileView from "./components/ProfileView";
 import Connections from "./components/ConnectionPage";
 import Requests from "./components/RequestsPage";
+import MenuLayout from "./components/MenuLayout";
 
 function App() {
   return (
@@ -17,9 +18,12 @@ function App() {
           <Routes>
             <Route path="/" element={<MainBody />}>
               <Route path="/login" element={<Login />} />
-              <Route path="/feed" element={<Feed />} />
-              <Route path="/connections" element={<Connections />} />
-              <Route path="/requests" element={<Requests />} />
+              <Route element={<MenuLayout />}>
+                <Route path="/feed" element={<Feed />} />
+                <Route path="/connections" element={<Connections />} />
+                <Route path="/requests" element={<Requests />} />
+              </Route>
+
               <Route path="/profile" element={<ProfileView />} />
             </Route>
           </Routes>

@@ -69,7 +69,7 @@ export default function Navbar() {
       ) : (
         <div className="tracking-wider">
           <button className="btn btn-ghost" onClick={handleLoginButton}>
-            <GoPerson size={20} /> LOGIN
+            <GoPerson size={20} /> SIGN IN
           </button>
         </div>
       )}
