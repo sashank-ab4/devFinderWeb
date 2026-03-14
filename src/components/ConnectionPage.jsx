@@ -26,43 +26,59 @@ export default function Connections() {
   if (myConnections.length === 0) return <h1>No Connections Found!</h1>;
   return (
     <div>
-      <h1 className="text-center my-10 font-bold uppercase tracking-wider">
-        {" "}
-        Connections{" "}
+      <h1 className="text-center my-10 font-bold uppercase tracking-wider text-xl">
+        Connections
       </h1>
-      {myConnections.map((connection) => {
-        const { photoUrl, firstName, lastName, age, gender, about, _id } =
-          connection;
-        return (
-          <>
+
+      <div className="max-w-2xl mx-auto space-y-4">
+        {myConnections.map((connection) => {
+          const { photoUrl, firstName, lastName, about, skills, _id } =
+            connection;
+
+          return (
             <div
               key={_id}
-              className="card card-side bg-[#e5e7e8] shadow-sm border h-full w-100 mx-auto"
+              className="flex items-start gap-4 bg-white border rounded-xl shadow-sm p-4 hover:shadow-md transition"
             >
-              <figure className="p-2 m-4">
-                <img
-                  className="w-20 h-20"
-                  src={
-                    photoUrl ||
-                    "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                  }
-                  alt="Profile"
-                />
-              </figure>
-              <div className="card-body text-left">
-                <h2 className="card-title ">
+              <img
+                className="w-16 h-16 rounded-full object-cover"
+                src={
+                  photoUrl ||
+                  "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                }
+                alt="Profile"
+              />
+
+              <div className="flex-1">
+                <h2 className="text-lg font-semibold">
                   {firstName} {lastName}
                 </h2>
-                <p>{about}</p>
-                <div className="card-actions items-start">
-                  <div className="badge badge-outline">{age}</div>
-                  <div className="badge badge-outline">{gender}</div>
-                </div>
+
+                <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                  {about || "No bio provided"}
+                </p>
+
+                {skills && skills.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {skills.slice(0, 3).map((skill, index) => (
+                      <span
+                        key={index}
+                        className="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
+
+              <button className="text-sm text-blue-600 hover:underline cursor-pointer">
+                View Profile
+              </button>
             </div>
-          </>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
