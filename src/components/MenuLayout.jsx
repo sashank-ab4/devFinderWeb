@@ -4,34 +4,49 @@ export default function MenuLayout() {
   return (
     <div>
       <div className="flex justify-center mt-5">
-        <ul className="flex gap-6 bg-gray-200 px-6 py-2 rounded-lg">
+        <ul className="flex gap-6 bg-gray-200 px-4 py-2 rounded-xl w-fit mx-auto">
           <li>
             <NavLink
               to="/feed"
               className={({ isActive }) =>
-                isActive ? "text-blue-500 font-semibold" : ""
+                `px-3 py-2 rounded-lg transition-all duration-300 ease-in-out
+      ${
+        isActive
+          ? "bg-blue-200 text-blue-600 font-semibold shadow-sm scale-105"
+          : "text-gray-600 hover:text-blue-500"
+      }`
               }
             >
               Feed
             </NavLink>
           </li>
+
           <li>
             <NavLink
               to="/connections"
               className={({ isActive }) =>
-                isActive
-                  ? "text-blue-500 font-semibold hover:border hover:border-blue-400"
-                  : ""
+                `px-3 py-2 rounded-lg transition-all duration-300 ease-in-out
+      ${
+        isActive
+          ? "bg-blue-200 text-blue-600 font-semibold shadow-sm scale-105"
+          : "text-gray-600 hover:text-blue-500 "
+      }`
               }
             >
               Connections
             </NavLink>
           </li>
+
           <li>
             <NavLink
               to="/requests"
               className={({ isActive }) =>
-                isActive ? "text-blue-500 font-semibold" : ""
+                `px-3 py-2 rounded-lg transition-all duration-300 ease-in-out
+      ${
+        isActive
+          ? "bg-blue-200 text-blue-600 font-semibold shadow-sm scale-105"
+          : "text-gray-600 hover:text-blue-500 "
+      }`
               }
             >
               Requests

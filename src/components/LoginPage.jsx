@@ -13,10 +13,12 @@ export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isSigninForm, setIsSigninForm] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         BASE_BACKEND_URL + "/login",
         {
@@ -33,6 +35,8 @@ export default function Login() {
       setTimeout(() => {
         setError(null);
       }, 5000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,15 +121,25 @@ export default function Login() {
           placeholder="Password"
           className="p-3 rounded-md bg-white border focus:ring-2 focus:ring-blue-400"
         />
-
         <button
+          disabled={loading}
           onClick={isSigninForm ? handleSignIn : handleLogin}
-          className="bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md font-semibold cursor-pointer"
+          className=" btn btn-lg bg-blue-500 tracking-wide text-white hover:bg-blue-600"
         >
-          {isSigninForm ? "Sign In" : "Login"}
+          {loading ? (
+            <span className="loading loading-spinner loading-secondary"></span>
+          ) : isSigninForm ? (
+            "Sign in"
+          ) : (
+            "Login"
+          )}
         </button>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && (
+          <div role="alert" className="alert alert-error alert-soft">
+            <span>{error}</span>
+          </div>
+        )}
 
         <p className="text-xs text-gray-500 text-center leading-5">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.
