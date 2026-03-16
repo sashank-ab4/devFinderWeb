@@ -1,16 +1,33 @@
-# React + Vite
+# DevFinder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## basic initializations
 
-Currently, two official plugins are available:
+- created a VITE + React Project
+- created one git repo and pushed my code to main branch
+- removed unneccesary code and made it clean for to start
+- installed tailwind css using -- npm install tailwindcss @tailwindcss/vite
+- installed daisyUI @ npm i -D daisyui@latest and changed the config files accordingly.
+- installed react-router using @ npm i react-router-dom
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Day 2
 
-## React Compiler
+- Building LoginPage
+- installed axios @ npm i axios
+- read more about the cors error and for now overcomed with cors middleware, npm package given and suggested by express.js
+- installed cors npm package @ npm i cors and called it at root level file (app.js) in Backend code
+- installed redux toolkit which is standardized and simplified way to write redux logic. Using npm install @reduxjs/toolkit react-redux
+- designed the component to update dynamically using useSelector (from redux) and redirecting to feed page using useNavigate(from react-router-dom)
+- made login button, when clicked it will take me to login page
+- when logged in, login will turn to welcome with name message with profile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Day 3 (12/03)
 
-## Expanding the ESLint configuration
+- you should not access other routes if you are not logged in!
+- if token is not present, redirect the user to login page!
+- logout feature and error handling
+- when we logged out, redirecting back to home page, developed using navigate("/") hook.
+- built user profile card which would be visible to others
+- built user profile details updation
+- toast message when updates are saved
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Day 4 (13/03)

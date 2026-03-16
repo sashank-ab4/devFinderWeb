@@ -109,7 +109,10 @@ export default function ProfileEditor({ user }) {
               <input
                 type="text"
                 className="w-full border rounded-lg px-3 py-3 focus:ring-2 focus:ring-blue-500"
-                value={photoUrl}
+                value={
+                  photoUrl ||
+                  "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                }
                 onChange={(e) => setPhotoUrl(e.target.value)}
               />
             </div>
