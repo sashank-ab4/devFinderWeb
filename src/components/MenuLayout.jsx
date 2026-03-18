@@ -1,6 +1,8 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function MenuLayout() {
+  const myRequests = useSelector((store) => store.request);
   return (
     <div>
       <div className="flex justify-center mt-5">
@@ -49,7 +51,10 @@ export default function MenuLayout() {
       }`
               }
             >
-              Requests
+              Requests{" "}
+              <div className="badge badge-sm badge-primary rounded-full">
+                {myRequests.length}
+              </div>
             </NavLink>
           </li>
         </ul>
