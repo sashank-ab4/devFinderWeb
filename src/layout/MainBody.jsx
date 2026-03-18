@@ -17,6 +17,12 @@ export default function MainBody() {
   const userData = useSelector((store) => store.user);
   const isHomePage = location.pathname === "/";
   const fetchUserProfile = async () => {
+    if (
+      location.pathname.startsWith("/login") ||
+      location.pathname.startsWith("/reset-password")
+    ) {
+      return;
+    }
     if (userData) return;
     try {
       const res = await axios.get(BASE_BACKEND_URL + "/profile/view", {

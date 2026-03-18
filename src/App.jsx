@@ -9,6 +9,7 @@ import ProfileView from "./components/ProfileView";
 import Connections from "./components/ConnectionPage";
 import Requests from "./components/RequestsPage";
 import MenuLayout from "./components/MenuLayout";
+import ResetPassword from "./components/ResetPasswordPage";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
           <Routes>
             <Route path="/" element={<MainBody />}>
               <Route path="/login" element={<Login />} />
+              <Route
+                path="/reset-password/:token"
+                element={<ResetPassword />}
+              />
               <Route element={<MenuLayout />}>
                 <Route path="/feed" element={<Feed />} />
                 <Route path="/connections" element={<Connections />} />

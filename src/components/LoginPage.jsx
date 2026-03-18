@@ -54,6 +54,20 @@ export default function Login() {
       setError(err?.message?.message) || "Please check again!";
     }
   };
+
+  const handleForgotPassword = async () => {
+    try {
+      const response = await axios.post(
+        BASE_BACKEND_URL + "/forgot-password",
+        { emailId },
+        { withCredentials: true },
+      );
+
+      window.open(response?.data?.resetLink, "_self");
+    } catch (err) {
+      alert(err?.response?.data || "Error Sending Link!");
+    }
+  };
   return (
     <section
       className="min-h-screen bg-cover bg-center relative flex flex-col"
@@ -125,6 +139,14 @@ export default function Login() {
             placeholder="Password"
             className="p-3 rounded-md bg-white border focus:ring-2 focus:ring-blue-400"
           />
+
+          <button
+            onClick={handleForgotPassword}
+            className="  text-blue-400 text-sm hover:underline cursor-pointer"
+          >
+            Forgot Password ?
+          </button>
+
           <button
             disabled={loading}
             onClick={isSigninForm ? handleSignIn : handleLogin}
