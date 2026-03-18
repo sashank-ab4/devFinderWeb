@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 export default function MenuLayout() {
   const myRequests = useSelector((store) => store.request);
+  const requestCount = myRequests.length;
   return (
     <div>
       <div className="flex justify-center mt-5">
@@ -52,9 +53,11 @@ export default function MenuLayout() {
               }
             >
               Requests{" "}
-              <div className="badge badge-sm badge-primary rounded-full">
-                {myRequests.length}
-              </div>
+              {requestCount > 0 && (
+                <span className="ml-2 px-4 py-0.5 text-xs bg-blue-400 text-white rounded-full">
+                  {requestCount}
+                </span>
+              )}
             </NavLink>
           </li>
         </ul>

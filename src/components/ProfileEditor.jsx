@@ -116,7 +116,7 @@ export default function ProfileEditor({ user }) {
 
             <button
               onClick={handleEdit}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition cursor-pointer"
             >
               Save Changes
             </button>

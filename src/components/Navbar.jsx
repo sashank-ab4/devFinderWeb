@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 import { removeUser } from "../utils/userSlice";
 import { GoPerson } from "react-icons/go";
+import { HiHome } from "react-icons/hi";
 
 export default function Navbar() {
   //this down here is subscribing to the store
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isProfilePage = location.pathname.startsWith("/profile");
+  const backToFeedPage = location.state?.comingFrom || "/feed";
   // again updating the store doing the action of removing the user!
   const updaterFunction = useDispatch();
   const handleLoginButton = () => {
@@ -27,6 +31,7 @@ export default function Navbar() {
       console.error(error);
     }
   };
+
   return (
     <div className="relative navbar text-black bg-[#ddedf5] shadow-sm">
       <div className="flex-1">
@@ -35,8 +40,16 @@ export default function Navbar() {
         </Link>
       </div>
       {user ? (
-        <div className="flex gap-2 items-center">
-          <div>Hey, {user.firstName}</div>
+        <div className="flex gap-2 items-center  ">
+          {isProfilePage && (
+            <Link to={backToFeedPage}>
+              <HiHome
+                size={34}
+                className="p-2 rounded-full hover:bg-blue-400 transition"
+              />
+            </Link>
+          )}
+          <div className="hidden sm:block">Hey, {user.firstName}!</div>
           <div className="dropdown dropdown-end mx-6">
             <div
               tabIndex={0}
@@ -52,7 +65,11 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to={"/profile"} className="justify-between">
+                <Link
+                  to={"/profile"}
+                  state={{ comingFrom: location.pathname }}
+                  className="justify-between"
+                >
                   Profile
                   <span className="badge">New</span>
                 </Link>
