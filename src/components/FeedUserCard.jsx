@@ -48,14 +48,14 @@ export default function FeedUserCard({ user }) {
         <div className="flex justify-center gap-4 pt-3">
           <button
             onClick={() => handleRequestsFromFeed("ignored", _id)}
-            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer"
           >
             Ignore
           </button>
 
           <button
             onClick={() => handleRequestsFromFeed("interested", _id)}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
           >
             Interested
           </button>

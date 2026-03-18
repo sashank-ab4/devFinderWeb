@@ -44,8 +44,8 @@ export default function Navbar() {
           {isProfilePage && (
             <Link to={backToFeedPage}>
               <HiHome
-                size={34}
-                className="p-2 rounded-full hover:bg-blue-400 transition"
+                size={36}
+                className="p-2 rounded-full hover:bg-blue-200 transition"
               />
             </Link>
           )}
