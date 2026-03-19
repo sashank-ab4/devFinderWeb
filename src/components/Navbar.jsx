@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 import { removeUser } from "../utils/userSlice";
 import { GoPerson } from "react-icons/go";
-import { HiHome } from "react-icons/hi";
+import { PiUsersLight } from "react-icons/pi";
 
 export default function Navbar() {
   //this down here is subscribing to the store
@@ -43,7 +43,7 @@ export default function Navbar() {
         <div className="flex gap-2 items-center  ">
           {isProfilePage && (
             <Link to={backToFeedPage}>
-              <HiHome
+              <PiUsersLight
                 size={36}
                 className="p-2 rounded-full hover:bg-blue-200 transition"
               />
