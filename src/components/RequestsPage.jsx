@@ -15,7 +15,7 @@ export default function Requests() {
           withCredentials: true,
         },
       );
-      console.log(response?.data?.data);
+
       requestUpdaterFunction(addRequest(response?.data?.data)); // always res.data here orelse will redux will throw error
     } catch (err) {
       console.error("ERROR:" + err.message);
@@ -29,7 +29,6 @@ export default function Requests() {
         { withCredentials: true },
       );
       requestUpdaterFunction(removeRequest(_id));
-      console.log(response);
     } catch (error) {
       console.error(error.message);
     }

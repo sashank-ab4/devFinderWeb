@@ -23,7 +23,7 @@ export default function ProfileEditor({ user }) {
         { withCredentials: true },
       );
       saveEditUpdaterFunction(addUser(res?.data?.data));
-      //console.log(res?.data?.data);
+
       setToast(true);
       setTimeout(() => {
         setToast(false);

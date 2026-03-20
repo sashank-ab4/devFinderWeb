@@ -49,7 +49,7 @@ export default function Login() {
         { firstName, lastName, emailId, password, phoneNumber },
         { withCredentials: true },
       );
-      console.log(response);
+
       dispatch(addUser(response?.data?.data));
       navigate("/profile");
     } catch (err) {

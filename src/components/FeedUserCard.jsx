@@ -13,7 +13,7 @@ export default function FeedUserCard({ user }) {
         {},
         { withCredentials: true },
       );
-      console.log(res);
+
       dispatch(removeProfileFromFeed(_id));
     } catch (err) {
       console.error(err.message);

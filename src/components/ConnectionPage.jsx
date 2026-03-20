@@ -12,7 +12,7 @@ export default function Connections() {
       const response = await axios.get(BASE_BACKEND_URL + "/user/connections", {
         withCredentials: true,
       });
-      console.log(response.data.data);
+
       connectionAdderFunction(addConnection(response?.data?.data));
     } catch (err) {
       console.err("ERROR:" + err.message);
