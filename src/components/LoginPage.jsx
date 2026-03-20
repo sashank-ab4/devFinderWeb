@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_BACKEND_URL, LOGIN_PAGE_IMG } from "../utils/mockData";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 export default function Login() {
   const [emailId, setEmailId] = useState("");
@@ -14,6 +15,7 @@ export default function Login() {
   const [isSigninForm, setIsSigninForm] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -73,7 +75,7 @@ export default function Login() {
       className="min-h-screen bg-cover bg-center relative flex flex-col"
       style={{ backgroundImage: `url(${LOGIN_PAGE_IMG})` }}
     >
-      <div className="flex items-center justify-center mt-12">
+      <div className="flex items-center justify-center mt-12 ">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="bg-white p-10 rounded-xl w-105 flex flex-col space-y-5 shadow-lg"
@@ -132,13 +134,26 @@ export default function Login() {
             className="p-3 rounded-md bg-white border focus:ring-2 focus:ring-blue-400"
           />
 
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-            className="p-3 rounded-md bg-white border focus:ring-2 focus:ring-blue-400"
-          />
+          <div className="relative w-full">
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full p-3 pr-10 rounded-md bg-white border focus:ring-2 focus:ring-blue-400"
+            />
+
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+            >
+              {!showPassword ? (
+                <IoEyeOffOutline size={22} />
+              ) : (
+                <IoEyeOutline size={22} />
+              )}
+            </span>
+          </div>
 
           <button
             onClick={handleForgotPassword}
