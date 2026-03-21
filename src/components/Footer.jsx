@@ -1,3 +1,4 @@
+import { FaGithub } from "react-icons/fa6";
 export default function Footer() {
   return (
     <>
@@ -9,19 +10,19 @@ export default function Footer() {
             © 2026 DevTribe. All Rights Reserved.
           </p>
 
-          <p className="text-xs tracking-[0.3em] uppercase opacity-60">
+          <p className="text-xs tracking-[0.3em] uppercase ">
             {" "}
             Made for dev community
           </p>
           <div className="text-center text-[11px] tracking-widest text-black mt-1">
-            Crafted by{" "}
+            By{" "}
             <a
-              href="https://linkedin.com/in/https://www.linkedin.com/in/sashank-akkabattula-22a311247/"
+              href="https://github.com/sashank-ab4"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[black] uppercase hover:text-blue-500 transition"
+              className="inline-flex gap-1 text-[black] uppercase hover:text-blue-500 transition"
             >
-              Sashank
+              Sashank <FaGithub size={14} className="mb-px" />
             </a>
           </div>
         </div>
