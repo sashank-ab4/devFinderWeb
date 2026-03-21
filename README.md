@@ -31,3 +31,11 @@
 - toast message when updates are saved
 
 ## Day 4 (13/03)
+
+# Deployment
+
+- Backend
+  - enter the server with the key - ssh -i "devTribe-secret.pem" ubuntu@ec2-13-233-223-94.ap-south-1.compute.amazonaws.com
+  - list the folders and then cd to backend file/folder - my-backend
+  - npm install, which will install all the packages and dependencies
+  - pm2 main command -pm2 start src/app.js --name devTribe-backend
