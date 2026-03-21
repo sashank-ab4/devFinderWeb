@@ -10,7 +10,7 @@ import HeroSection from "./HeroSection";
 import MiddleSection from "./MiddleSection";
 
 export default function MainBody() {
-  // this is dispatch which will update the store so i named it updating function for awareness
+  // this is dispatch which will update the store so i named it updating function for idea
   const updatingFunction = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,14 +31,14 @@ export default function MainBody() {
       updatingFunction(addUser(res.data));
     } catch (err) {
       if (err.response?.status === 401) {
-        navigate("/login");
+        if (location.pathname !== "/") {
+          navigate("/");
+        }
       }
-      console.error(err);
     }
   };
 
   useEffect(() => {
-    if (location.pathname === "/login") return;
     fetchUserProfile();
   }, []);
   return (
