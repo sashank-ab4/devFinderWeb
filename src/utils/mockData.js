@@ -9,3 +9,6 @@ export const HERO_SEC_IMG =
 
 export const LOGIN_PAGE_IMG =
   "https://i.pinimg.com/1200x/a6/11/9e/a6119e4ef5594227d591e6fdbf44e7b0.jpg";
+
+export const ERROR_PAGE_URL =
+  "https://i.pinimg.com/1200x/79/a7/71/79a7715165dda3aaa0dae7ef97b373c4.jpg";

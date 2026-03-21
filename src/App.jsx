@@ -10,6 +10,7 @@ import Connections from "./components/ConnectionPage";
 import Requests from "./components/RequestsPage";
 import MenuLayout from "./components/MenuLayout";
 import ResetPassword from "./components/ResetPasswordPage";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (

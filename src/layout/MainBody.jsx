@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import HeroSection from "./HeroSection";
 import MiddleSection from "./MiddleSection";
+import NetworkErrorPage from "../components/ErrorPage";
 
 export default function MainBody() {
   // this is dispatch which will update the store so i named it updating function for idea
@@ -43,6 +44,7 @@ export default function MainBody() {
   }, []);
   return (
     <>
+      <NetworkErrorPage />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="grow">
