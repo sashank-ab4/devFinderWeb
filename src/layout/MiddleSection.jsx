@@ -24,24 +24,20 @@ export default function MiddleSection() {
   ];
   return (
     <section
-      className="min-h-screen bg-cover bg-center relative flex flex-col"
+      className="min-h-screen bg-cover bg-center relative flex flex-col overflow-x-hidden"
       style={{ backgroundImage: `url(${LOGIN_PAGE_IMG})` }}
     >
-      {/* Overlay (does not affect cards) */}
+      {/* overlay ( which does not affect cards) */}
       <div className="absolute inset-0 bg-black/10 z-0"></div>
       <div className=" mb-6 inset-x-0 h-px bg-linear-to-r from-transparent via-blue-400 to-transparent" />
-      {/* Heading */}
-      <div className="relative z-10 pt-20 text-center">
-        <span className="text-rotate text-7xl text-blue-800 leading-loose tracking-wide">
-          <span className="justify-items-center">
-            <span>💻 CONNECT</span>
-            <span>⌨️ COLLABORATE</span>
-            <span>🌎 CREATE</span>
-          </span>
-        </span>
+
+      <div className="relative z-10 pt-16 text-center px-4">
+        <div className="text-3xl sm:text-5xl lg:text-6xl text-blue-800 leading-snug font-semibold tracking-wide">
+          <span>From Code to Community.</span>
+        </div>
       </div>
 
-      <div className="relative z-10 lg:mt-auto sm:mt-20 pb-16">
+      <div className="relative z-10 mt-16 lg:mt-auto pb-20">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cards.map((card, i) => (
             <div
@@ -50,7 +46,6 @@ export default function MiddleSection() {
                          hover:shadow-xl hover:-translate-y-1
                          transition-all duration-300"
             >
-              {/* Image */}
               <div className="h-48 flex items-center justify-center bg-white">
                 <img
                   src={card.img}
@@ -59,7 +54,6 @@ export default function MiddleSection() {
                 />
               </div>
 
-              {/* Content */}
               <div className="p-5 text-left">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {card.title}

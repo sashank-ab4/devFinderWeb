@@ -13,15 +13,14 @@ export default function HeroSection() {
       {/* Overlay for readability */}
       {/* <div className="absolute inset-0 bg-black/20"></div> */}
 
-      {/* Content */}
       <div className="relative z-10 text-center px-6">
         <h1 className="text-6xl font-bold text-blue-600 tracking-wide">
           DevTribe
         </h1>
 
         <p className="mt-6 text-lg text-[#050531] max-w-md mx-auto">
-          Discover developers, build connections, and collaborate on amazing
-          projects.
+          Discover Developers, Build connections, and Collaborate on amazing
+          Projects.
         </p>
 
         <Link
