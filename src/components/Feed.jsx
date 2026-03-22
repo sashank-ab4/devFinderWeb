@@ -50,7 +50,16 @@ export default function Feed() {
                   Developers
                 </span>
                 <span className="bg-blue-400 text-blue-900 px-2 rounded">
+                  Creators
+                </span>
+                <span className="bg-teal-400 text-teal-900 px-2 rounded">
+                  Builders
+                </span>
+                <span className="bg-red-400 text-red-900 px-2 rounded">
                   Coders
+                </span>
+                <span className="bg-blue-400 text-blue-900 px-2 rounded">
+                  Dreamers
                 </span>
               </span>
             </span>

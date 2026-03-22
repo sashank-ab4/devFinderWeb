@@ -32,7 +32,7 @@ export default function Connections() {
           : "Connections"}
       </h1>
 
-      <h3 className="text-center mb-6 font-mono text-sm sm:text-lg text-gray-600">
+      <h3 className="text-center mb-6 font-sans text-sm sm:text-lg text-gray-600">
         Discover more about your Developer Tribe!
       </h3>
 
