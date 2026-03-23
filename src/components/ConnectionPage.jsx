@@ -3,6 +3,7 @@ import { BASE_BACKEND_URL } from "../utils/mockData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
+import { Link } from "react-router-dom";
 
 export default function Connections() {
   const connectionAdderFunction = useDispatch();
@@ -85,9 +86,12 @@ export default function Connections() {
                 )}
               </div>
 
-              <button className="mt-3 sm:mt-0 text-sm text-blue-600 hover:underline">
+              <button className="mt-3 sm:mt-0 text-sm text-blue-600 hover:underline cursor-pointer">
                 View Profile
               </button>
+              <Link to={"/chat/" + _id}>
+                <button className="btn btn-soft btn-primary">Chat</button>
+              </Link>
             </div>
           );
         })}

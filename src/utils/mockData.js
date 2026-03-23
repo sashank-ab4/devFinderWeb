@@ -1,5 +1,5 @@
 export const BASE_BACKEND_URL =
-  import.meta.env.MODE === "developement" ? "http://localhost:4444" : "/api";
+  import.meta.env.MODE === "development" ? "http://localhost:4444" : "/api";
 
 export const MID_SEC_IMG =
   "https://i.pinimg.com/1200x/45/17/a1/4517a1d803d51236c45bb1fa3ad92282.jpg";
