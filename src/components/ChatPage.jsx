@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_BACKEND_URL } from "../utils/mockData";
 
 export default function MessageFeed() {
   const { textingUserId } = useParams();
@@ -9,6 +11,25 @@ export default function MessageFeed() {
   const [latestMessage, setLatestMessage] = useState("");
   const user = useSelector((store) => store.user);
   const userId = user?._id;
+  const fetchChatMessages = async () => {
+    const chat = await axios.get(BASE_BACKEND_URL + "/chat/" + textingUserId, {
+      withCredentials: true,
+    });
+
+    const chatTexts = chat?.data?.messages.map((msg) => {
+      const { senderId, text } = msg;
+      return {
+        firstName: senderId?.firstName,
+        lastName: senderId?.lastName,
+        text,
+      };
+    });
+    setMessages(chatTexts);
+  };
+  useEffect(() => {
+    fetchChatMessages();
+  }, []);
+
   useEffect(() => {
     if (!userId) {
       return;
@@ -61,10 +82,10 @@ export default function MessageFeed() {
                   </div>
                 </div>
                 <div className="chat-header">
-                  {msg.firstName}
+                  {`${msg?.firstName} ${msg?.lastName}`}
                   <time className="text-xs opacity-50">12:45</time>
                 </div>
-                <div className="chat-bubble">{msg.text}</div>
+                <div className="chat-bubble">{msg?.text}</div>
                 <div className="chat-footer opacity-50">Delivered</div>
               </div>
               <div className="chat chat-end">
