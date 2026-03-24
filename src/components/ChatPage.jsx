@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
@@ -15,11 +15,12 @@ export default function MessageFeed() {
   const user = useSelector((store) => store.user);
   const userId = user?._id;
   const navigate = useNavigate();
+  const endTextsRef = useRef(null);
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_BACKEND_URL + "/chat/" + textingUserId, {
       withCredentials: true,
     });
-    console.log(chat?.data);
+
     const chatTexts = chat?.data?.messages.map((msg) => {
       return {
         senderId: msg.senderId,
@@ -35,7 +36,7 @@ export default function MessageFeed() {
       BASE_BACKEND_URL + "/user/" + textingUserId,
       { withCredentials: true },
     );
-    console.log(response.data);
+
     setChatterUser(response?.data);
   };
   useEffect(() => {
@@ -76,28 +77,38 @@ export default function MessageFeed() {
     });
     setLatestMessage("");
   };
-
+  useEffect(() => {
+    endTextsRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
   return (
     <>
-      <div className="flex flex-col h-[90vh] max-w-2xl mx-auto border rounded-xl mt-5 shadow bg-base-100">
-        <div className="relative flex items-center p-3 border-b">
-          <div className="tooltip tooltip-right" data-tip="Back">
-            <button
-              onClick={() => navigate(-1)}
-              className="p-2 rounded-full hover:bg-gray-200 transition"
-            >
-              <MdKeyboardArrowLeft size={22} />
-            </button>
-          </div>
+      <div
+        className="
+      flex flex-col
+      h-screen sm:h-[90vh]
+      w-full sm:max-w-2xl
+      mx-auto
+      border sm:rounded-xl
+      sm:mt-5
+      shadow bg-base-100
+    "
+      >
+        <div className="relative flex items-center p-2 sm:p-3 border-b">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 rounded-full hover:bg-gray-200 transition"
+          >
+            <MdKeyboardArrowLeft size={22} />
+          </button>
 
-          <h1 className="absolute left-1/2 -translate-x-1/2 font-bold tracking-wide">
+          <h1 className="absolute left-1/2 -translate-x-1/2 font-semibold sm:font-bold tracking-wide text-sm sm:text-base">
             CHAT
           </h1>
         </div>
 
-        <div className="flex items-center gap-3 p-3 border-b bg-base-100">
+        <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 border-b bg-base-100">
           <div className="avatar">
-            <div className="w-10 rounded-full">
+            <div className="w-8 sm:w-10 rounded-full">
               <img
                 src={
                   chatterUser?.photoUrl ??
@@ -109,14 +120,14 @@ export default function MessageFeed() {
           </div>
 
           <div>
-            <p className="font-semibold">
+            <p className="font-semibold text-sm sm:text-base">
               {chatterUser?.firstName} {chatterUser?.lastName}
             </p>
-            <p className="text-xs text-gray-500">Active now</p>
+            <p className="text-[10px] sm:text-xs text-gray-500">Active now</p>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2">
           {messages.map((msg, index) => {
             const isMe = user?._id === msg?.senderId?._id;
 
@@ -126,7 +137,7 @@ export default function MessageFeed() {
                 className={`chat ${isMe ? "chat-end" : "chat-start"}`}
               >
                 <div className="chat-image avatar">
-                  <div className="w-10 rounded-full">
+                  <div className="w-8 sm:w-10 rounded-full">
                     <img
                       src={
                         isMe
@@ -139,13 +150,15 @@ export default function MessageFeed() {
                   </div>
                 </div>
 
-                <div className="chat-header text-xs opacity-70">
+                <div className="chat-header text-[10px] sm:text-xs opacity-70">
                   {msg?.senderId?.firstName}
                 </div>
 
-                <div className="chat-bubble">{msg?.text}</div>
+                <div className="chat-bubble text-sm sm:text-base">
+                  {msg?.text}
+                </div>
 
-                <div className="text-[10px] opacity-50 mt-1">
+                <div className="text-[9px] sm:text-[10px] opacity-50 mt-1">
                   {msg?.createdAt &&
                     new Date(msg.createdAt).toLocaleTimeString([], {
                       hour: "2-digit",
@@ -155,18 +168,27 @@ export default function MessageFeed() {
               </div>
             );
           })}
+
+          <div ref={endTextsRef} />
         </div>
 
-        <div className="p-3 border-t flex gap-2">
+        <div className="p-2 sm:p-3 border-t flex gap-2">
           <input
             value={latestMessage}
             onChange={(e) => setLatestMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSendMessage();
+            }}
             type="text"
             placeholder="Type a message..."
-            className="input input-bordered w-full"
+            className="input input-bordered w-full text-sm sm:text-base"
           />
-          <button onClick={handleSendMessage} className="btn btn-primary">
-            <VscSend size={22} />
+
+          <button
+            onClick={handleSendMessage}
+            className="btn btn-primary px-3 sm:px-4"
+          >
+            <VscSend size={20} />
           </button>
         </div>
       </div>
