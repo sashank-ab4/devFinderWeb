@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
+import { TbMessage } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
 
 export default function Connections() {
   const connectionAdderFunction = useDispatch();
@@ -85,13 +87,20 @@ export default function Connections() {
                   </div>
                 )}
               </div>
-
-              <button className="mt-3 sm:mt-0 text-sm text-blue-600 hover:underline cursor-pointer">
-                View Profile
-              </button>
-              <Link to={"/chat/" + _id}>
-                <button className="btn btn-soft btn-primary">Chat</button>
-              </Link>
+              <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-start">
+                <div className="tooltip tooltip-bottom" data-tip="View Profile">
+                  <button className="btn btn-soft btn-primary ">
+                    <CgProfile size={24} />
+                  </button>
+                </div>
+                <div className="tooltip tooltip-bottom" data-tip="Message">
+                  <Link to={"/chat/" + _id}>
+                    <button className="btn btn-soft btn-primary">
+                      <TbMessage size={24} />
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           );
         })}
