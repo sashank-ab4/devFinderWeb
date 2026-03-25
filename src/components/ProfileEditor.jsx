@@ -14,7 +14,9 @@ export default function ProfileEditor({ user }) {
   const [input, setInput] = useState("");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
-  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
+  const [photoUrl, setPhotoUrl] = useState(
+    "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+  );
   const [toast, setToast] = useState(false);
 
   const saveEditUpdaterFunction = useDispatch();
@@ -163,6 +165,11 @@ export default function ProfileEditor({ user }) {
                 placeholder="Type a skill and press Enter"
                 onChange={(e) => setInput(e.target.value)}
               />
+              <p
+                className={`text-sm ${skills.length > 5 ? "text-red-500" : "text-gray-300"}  `}
+              >
+                * You can add upto 5 key Skills
+              </p>
             </div>
 
             <div>

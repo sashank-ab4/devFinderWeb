@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import FeedUserCard from "./FeedUserCard";
-import { Link } from "react-router-dom";
 
 export default function Feed() {
   //updater function

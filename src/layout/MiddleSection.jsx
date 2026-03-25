@@ -51,6 +51,7 @@ export default function MiddleSection() {
                   src={card.img}
                   alt={card.title}
                   className="h-full object-contain"
+                  loading="lazy"
                 />
               </div>
 

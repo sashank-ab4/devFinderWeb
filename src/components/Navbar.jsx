@@ -11,7 +11,11 @@ export default function Navbar() {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const location = useLocation();
-  const isProfilePage = location.pathname.startsWith("/profile");
+  const routePaths = ["/profile", "/my-account"];
+  const isProfilePage = routePaths.some((route) =>
+    location.pathname.startsWith(route),
+  );
+
   const backToFeedPage = location.state?.comingFrom || "/feed";
   // again updating the store doing the action of removing the user!
   const updaterFunction = useDispatch();
@@ -71,7 +75,7 @@ export default function Navbar() {
                   to={"/my-account"}
                   state={{ comingFrom: location.pathname }}
                 >
-                  Account
+                  My Account
                 </Link>
               </li>
               <li>
@@ -80,7 +84,7 @@ export default function Navbar() {
                   state={{ comingFrom: location.pathname }}
                   className="justify-between"
                 >
-                  Profile
+                  Edit Profile
                 </Link>
               </li>
 

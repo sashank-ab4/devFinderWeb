@@ -57,7 +57,6 @@ export default function MessageFeed() {
     });
 
     socket.on("messageReceived", (newMessage) => {
-      //console.log(senderId?.firstName + ": " + text);
       setMessages((messages) => [...messages, newMessage]);
     });
     // clean up function

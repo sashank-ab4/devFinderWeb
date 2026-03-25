@@ -18,9 +18,15 @@ export default function MyAccountPage() {
     gender,
     skills,
   } = user;
+
   return (
     user && (
       <>
+        <h2 className="text-center mt-5 uppercase tracking-wider font-semibold">
+          My Account
+        </h2>
+        <div className=" mb-6 inset-x-0 h-px bg-linear-to-r from-transparent via-black to-transparent mt-2" />
+
         <div className="max-w-5xl mx-auto bg-white rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 shadow-sm mt-10">
           <div className="flex flex-col items-center sm:items-start">
             <div className="relative">
@@ -28,12 +34,14 @@ export default function MyAccountPage() {
                 <img
                   src={photoUrl}
                   alt="profile"
-                  className="w-28 h-28 rounded-full object-cover border"
+                  className="w-28 h-28 rounded-full object-cover border-2 border-green-400"
                 />
               ) : (
-                <span className="text-xl font-semibold text-gray-700">
-                  {getInitials(firstName, lastName)}
-                </span>
+                <div className="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center border">
+                  <span className="text-xl font-semibold text-gray-700">
+                    {getInitials(firstName, lastName)}
+                  </span>
+                </div>
               )}
             </div>
           </div>

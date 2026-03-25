@@ -23,10 +23,7 @@ export default function FeedUserCard({ user }) {
     <div className="bg-white rounded-xl shadow-lg overflow-hidden border">
       <div className="h-60 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
         <img
-          src={
-            user.photoUrl ||
-            "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          }
+          src={user.photoUrl}
           alt="profile"
           className="h-full w-full object-contain"
         />
@@ -38,7 +35,25 @@ export default function FeedUserCard({ user }) {
         </h2>
 
         <p className="text-gray-600">{about}</p>
-        <p>{skills}</p>
+        <div className="flex flex-wrap gap-1">
+          {skills.length > 0 &&
+            skills.map((skill, index) => (
+              <span
+                className="px-4 py-1.5 
+                bg-gray-100 
+                text-gray-700 
+                text-sm 
+                rounded-full 
+                hover:bg-blue-100 
+                hover:text-blue-700 
+                transition
+                cursor-default"
+                key={index}
+              >
+                {skill}
+              </span>
+            ))}
+        </div>
         <div className="flex justify-center gap-4 pt-3">
           <button
             onClick={() => handleRequestsFromFeed("ignored", _id)}
