@@ -20,51 +20,53 @@ export default function FeedUserCard({ user }) {
     }
   };
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border">
-      <div className="h-60 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-        <img
-          src={user.photoUrl}
-          alt="profile"
-          className="h-full w-full object-contain"
-        />
+    <div className="bg-white rounded-2xl shadow-md border overflow-hidden max-w-sm w-full mx-auto">
+      <div className="flex justify-center mt-6">
+        <div className="w-34 h-34 rounded-full overflow-hidden border shadow-sm">
+          <img
+            src={user.photoUrl}
+            alt="profile"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
+      <div className="p-5 flex flex-col justify-between h-[250px]">
+        <div className="text-center space-y-2">
+          <h2 className="text-lg font-semibold text-gray-800 truncate">
+            {firstName} {lastName}
+          </h2>
 
-      <div className="p-6 text-center space-y-3">
-        <h2 className="text-xl font-semibold">
-          {firstName} {lastName}
-        </h2>
+          <p className="text-gray-600 text-sm line-clamp-2">{about}</p>
 
-        <p className="text-gray-600">{about}</p>
-        <div className="flex flex-wrap gap-1">
-          {skills.length > 0 &&
-            skills.map((skill, index) => (
+          <div className="flex flex-wrap justify-center gap-2 mt-6">
+            {skills?.slice(0, 4).map((skill) => (
               <span
-                className="px-4 py-1.5 
-                bg-gray-100 
-                text-gray-700 
-                text-sm 
-                rounded-full 
-                hover:bg-blue-100 
-                hover:text-blue-700 
-                transition
-                cursor-default"
-                key={index}
+                key={skill}
+                className="px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full"
               >
                 {skill}
               </span>
             ))}
+
+            {skills?.length > 4 && (
+              <span className="text-xs text-gray-500">
+                +{skills.length - 4} more
+              </span>
+            )}
+          </div>
         </div>
-        <div className="flex justify-center gap-4 pt-3">
+
+        <div className="flex gap-3 mt-4">
           <button
             onClick={() => handleRequestsFromFeed("ignored", _id)}
-            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer"
+            className="flex-1 py-2 cursor-pointer rounded-lg bg-gray-200 text-gray-700 text-sm font-medium"
           >
             Ignore
           </button>
 
           <button
             onClick={() => handleRequestsFromFeed("interested", _id)}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+            className="flex-1 py-2 cursor-pointer rounded-lg bg-blue-600 text-white text-sm font-medium"
           >
             Interested
           </button>

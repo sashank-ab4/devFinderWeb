@@ -30,7 +30,7 @@ export default function Feed() {
   if (!feed) return;
   if (feed.length <= 0)
     return (
-      <h1 className="text-center font-mono ">
+      <h1 className="text-center font-sans text-sm sm:text-lg text-gray-600 ">
         Refresh the Feed to find more Users!
       </h1>
     );

@@ -29,15 +29,17 @@ export default function Connections() {
 
   return (
     <div className="px-4 sm:px-6">
-      <h1 className="text-center my-8 sm:my-10 font-bold uppercase tracking-wider text-xl sm:text-2xl">
+      <h1 className="text-center my-8 sm:my-10 font-sans text-gray-600  text-xl sm:text-lg">
         {myConnections.length === 0
-          ? "You haven't made any connections yet!"
-          : "Connections"}
+          ? "You haven't made any Connections yet!"
+          : ""}
       </h1>
 
-      <h3 className="text-center mb-6 font-sans text-sm sm:text-lg text-gray-600">
-        Discover more about your Developer Tribe!
-      </h3>
+      {myConnections.length === 0 || (
+        <h3 className="text-center mb-6 font-sans text-sm sm:text-lg text-gray-600">
+          Discover more about your Developer Tribe!
+        </h3>
+      )}
 
       <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
         {myConnections.map((connection) => {

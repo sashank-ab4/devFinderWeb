@@ -27,7 +27,7 @@ export default function MyAccountPage() {
         </h2>
         <div className=" mb-6 inset-x-0 h-px bg-linear-to-r from-transparent via-black to-transparent mt-2" />
 
-        <div className="max-w-5xl mx-auto bg-white rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 shadow-sm mt-10">
+        <div className="max-w-5xl mx-auto bg-white border rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 shadow-sm mt-10">
           <div className="flex flex-col items-center sm:items-start">
             <div className="relative">
               {photoUrl ? (
@@ -83,7 +83,7 @@ export default function MyAccountPage() {
             </div>
           </div>
         </div>
-        <div className="max-w-5xl mx-auto mt-6 bg-white rounded-2xl shadow-sm p-6">
+        <div className="max-w-5xl mx-auto mt-6 bg-white border rounded-2xl shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Skills</h3>
           <div className="flex flex-wrap gap-3">
             {skills.length > 0 ? (

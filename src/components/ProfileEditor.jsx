@@ -14,22 +14,17 @@ export default function ProfileEditor({ user }) {
   const [input, setInput] = useState("");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
-  const [photoUrl, setPhotoUrl] = useState(
-    "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-  );
+  const [photoUrl, setPhotoUrl] = useState(user?.photoUrl);
   const [toast, setToast] = useState(false);
 
   const saveEditUpdaterFunction = useDispatch();
   const addSkill = (e) => {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
-
       const newSkill = input.trim();
-
       if (newSkill && !skills.includes(newSkill)) {
         setSkills([...skills, newSkill]);
       }
-
       setInput("");
     }
   };
@@ -196,7 +191,9 @@ export default function ProfileEditor({ user }) {
 
         <div className="flex items-start justify-center">
           <div className="w-full max-w-sm">
-            <FeedUserCard user={{ firstName, lastName, about, photoUrl }} />
+            <FeedUserCard
+              user={{ firstName, lastName, about, photoUrl, skills }}
+            />
           </div>
         </div>
       </div>

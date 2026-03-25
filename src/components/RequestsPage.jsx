@@ -41,10 +41,10 @@ export default function Requests() {
 
   return (
     <div className="min-h-screen bg-white p-6 ">
-      <h1 className="text-xl font-semibold text-black mb-5  text-center">
+      <h1 className="text-xl font-sans text-center sm:text-lg text-gray-600">
         {myRequests.length === 0
-          ? "You don't have any connection requests yet"
-          : "Requests"}
+          ? "You don't have any Connection Requests yet!"
+          : ""}
       </h1>
       {myRequests > 0 && (
         <h3 className="text-lg font-mono text-black mb-6 text-center">
