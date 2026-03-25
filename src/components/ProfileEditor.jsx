@@ -10,7 +10,7 @@ export default function ProfileEditor({ user }) {
   const [lastName, setlastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age || "");
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
-  const [skills, setSkills] = useState(user?.slills || []);
+  const [skills, setSkills] = useState(user?.skills || []);
   const [input, setInput] = useState("");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
@@ -18,7 +18,7 @@ export default function ProfileEditor({ user }) {
   const [toast, setToast] = useState(false);
 
   const saveEditUpdaterFunction = useDispatch();
-  const handleKeyDown = (e) => {
+  const addSkill = (e) => {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
 
@@ -159,7 +159,7 @@ export default function ProfileEditor({ user }) {
                 type="text"
                 className="flex-1 min-w-30 outline-none"
                 value={input}
-                onKeyDown={handleKeyDown}
+                onKeyDown={addSkill}
                 placeholder="Type a skill and press Enter"
                 onChange={(e) => setInput(e.target.value)}
               />
@@ -189,9 +189,7 @@ export default function ProfileEditor({ user }) {
 
         <div className="flex items-start justify-center">
           <div className="w-full max-w-sm">
-            <FeedUserCard
-              user={{ firstName, lastName, age, gender, about, photoUrl }}
-            />
+            <FeedUserCard user={{ firstName, lastName, about, photoUrl }} />
           </div>
         </div>
       </div>
