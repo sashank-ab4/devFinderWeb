@@ -9,22 +9,40 @@ export default function ProfileEditor({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setlastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age || "");
-
+  const [skills, setSkills] = useState([]);
+  const [input, setInput] = useState("");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
   const [toast, setToast] = useState(false);
-  /* const [error, setError] = useState(null) */
+
   const saveEditUpdaterFunction = useDispatch();
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+
+      const newSkill = input.trim();
+
+      if (newSkill && !skills.includes(newSkill)) {
+        setSkills([...skills, newSkill]);
+      }
+
+      setInput("");
+    }
+  };
+  const removeSkill = (skillToRemove) => {
+    setSkills(skills.filter((skill) => skill !== skillToRemove));
+  };
+
   const handleEdit = async () => {
     try {
       const res = await axios.patch(
         BASE_BACKEND_URL + "/profile/edit",
-        { firstName, lastName, age, photoUrl, about, gender },
+        { firstName, lastName, age, photoUrl, about, gender, skills },
         { withCredentials: true },
       );
-      saveEditUpdaterFunction(addUser(res?.data?.data));
 
+      saveEditUpdaterFunction(addUser(res?.data?.data));
       setToast(true);
       setTimeout(() => {
         setToast(false);
@@ -99,6 +117,30 @@ export default function ProfileEditor({ user }) {
                 className="w-full border rounded-lg px-3 py-3 focus:ring-2 focus:ring-blue-500"
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
+              />
+            </div>
+            <div className="border rounded-xl p-3 flex flex-wrap gap-2">
+              <label className="block text-sm font-medium mb-1 w-full">
+                Skills
+              </label>
+
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                >
+                  {skill}
+                  <button onClick={() => removeSkill(skill)}>✕</button>
+                </div>
+              ))}
+
+              <input
+                type="text"
+                className="flex-1 min-w-[120px] outline-none"
+                value={input}
+                onKeyDown={handleKeyDown}
+                placeholder="Type a skill and press Enter"
+                onChange={(e) => setInput(e.target.value)}
               />
             </div>
 

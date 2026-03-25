@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { LuMailCheck } from "react-icons/lu";
 import { getInitials } from "../utils/mockData";
+import { Link } from "react-router-dom";
 
 export default function MyAccountPage() {
   const user = useSelector((store) => store.user);
-  console.log(user);
   if (!user) return <div>Loading...</div>;
   const {
     firstName,
@@ -22,7 +22,6 @@ export default function MyAccountPage() {
     user && (
       <>
         <div className="max-w-5xl mx-auto bg-white rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 shadow-sm mt-10">
-          {/* LEFT: Profile Image + Completion */}
           <div className="flex flex-col items-center sm:items-start">
             <div className="relative">
               {photoUrl ? (
@@ -39,32 +38,30 @@ export default function MyAccountPage() {
             </div>
           </div>
 
-          {/* RIGHT: Details */}
           <div className="flex-1">
-            {/* Name + Edit */}
             <div className="flex items-center gap-3">
               <h2 className="text-2xl font-bold text-gray-900">
                 {firstName} {lastName}
               </h2>
-              <span className="text-gray-500 cursor-pointer">edit</span>
+              <Link
+                to={"/profile"}
+                className="text-gray-500 cursor-pointer hover:text-gray-800"
+              >
+                Edit
+              </Link>
             </div>
 
-            {/* Last updated */}
             <p className="text-sm text-gray-500 mt-1">{about}</p>
 
-            {/* Divider */}
             <hr className="my-4 border-gray-300" />
 
-            {/* Info Section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
-              {/* LEFT COLUMN */}
               <div className="space-y-3">
                 <p>India</p>
                 <p>{age}</p>
                 <p>{gender}</p>
               </div>
 
-              {/* RIGHT COLUMN */}
               <div className="space-y-3">
                 <p className="flex items-center gap-2">
                   <MdOutlineLocalPhone size={20} />
