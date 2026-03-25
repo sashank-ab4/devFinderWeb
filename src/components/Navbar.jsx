@@ -68,17 +68,22 @@ export default function Navbar() {
             >
               <li>
                 <Link
+                  to={"/my-account"}
+                  state={{ comingFrom: location.pathname }}
+                >
+                  Account
+                </Link>
+              </li>
+              <li>
+                <Link
                   to={"/profile"}
                   state={{ comingFrom: location.pathname }}
                   className="justify-between"
                 >
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
-              <li>
-                <a>Settings</a>
-              </li>
+
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>

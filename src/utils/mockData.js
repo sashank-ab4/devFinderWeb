@@ -12,3 +12,7 @@ export const LOGIN_PAGE_IMG =
 
 export const ERROR_PAGE_URL =
   "https://i.pinimg.com/1200x/79/a7/71/79a7715165dda3aaa0dae7ef97b373c4.jpg";
+
+export const getInitials = (firstName = "", lastName = "") => {
+  return `${firstName.slice(0, 1)}${lastName.slice(0, 1)}`.toUpperCase();
+};
