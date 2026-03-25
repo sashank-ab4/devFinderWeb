@@ -9,6 +9,7 @@ export default function ProfileEditor({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setlastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age || "");
+
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
@@ -35,7 +36,7 @@ export default function ProfileEditor({ user }) {
   return (
     <>
       <div className="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-2 gap-10">
-        <div className="bg-gray-100 shadow-lg rounded-xl p-8 border">
+        <div className="bg-white shadow-lg rounded-xl p-8 border">
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Edit Profile
           </h2>

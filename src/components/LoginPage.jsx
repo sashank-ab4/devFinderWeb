@@ -181,14 +181,6 @@ export default function Login() {
               <span>{error}</span>
             </div>
           )}
-
-          <p className="text-xs text-gray-500 text-center leading-5">
-            This page is protected by Google reCAPTCHA to ensure you're not a
-            bot.
-            <a href="/" className="text-blue-500 hover:underline ml-1">
-              Learn more
-            </a>
-          </p>
         </form>
       </div>
     </section>

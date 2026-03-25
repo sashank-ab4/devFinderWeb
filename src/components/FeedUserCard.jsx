@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { removeProfileFromFeed } from "../utils/feedSlice";
 
 export default function FeedUserCard({ user }) {
-  const { _id, firstName, lastName, age, about, gender } = user;
+  const { _id, firstName, lastName, about, skills } = user;
   const dispatch = useDispatch();
   const handleRequestsFromFeed = async (status, userId) => {
     try {
@@ -37,14 +37,8 @@ export default function FeedUserCard({ user }) {
           {firstName} {lastName}
         </h2>
 
-        {user.age && user.gender && (
-          <p className="text-gray-500">
-            {age}, {gender}
-          </p>
-        )}
-
         <p className="text-gray-600">{about}</p>
-
+        <p>{skills}</p>
         <div className="flex justify-center gap-4 pt-3">
           <button
             onClick={() => handleRequestsFromFeed("ignored", _id)}

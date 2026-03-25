@@ -12,6 +12,7 @@ import MenuLayout from "./components/MenuLayout";
 import ResetPassword from "./components/ResetPasswordPage";
 import ErrorPage from "./components/ErrorPage";
 import MessageFeed from "./components/ChatPage";
+import MyAccountPage from "./components/MyAccount";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               </Route>
 
               <Route path="/profile" element={<ProfileView />} />
+              <Route path="/my-account" element={<MyAccountPage />} />
               <Route path="/chat/:textingUserId" element={<MessageFeed />} />
             </Route>
           </Routes>
