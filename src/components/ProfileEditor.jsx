@@ -9,7 +9,8 @@ export default function ProfileEditor({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setlastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age || "");
-  const [skills, setSkills] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+  const [skills, setSkills] = useState(user?.slills || []);
   const [input, setInput] = useState("");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
@@ -38,7 +39,16 @@ export default function ProfileEditor({ user }) {
     try {
       const res = await axios.patch(
         BASE_BACKEND_URL + "/profile/edit",
-        { firstName, lastName, age, photoUrl, about, gender, skills },
+        {
+          firstName,
+          lastName,
+          age,
+          photoUrl,
+          about,
+          gender,
+          skills,
+          phoneNumber,
+        },
         { withCredentials: true },
       );
 
@@ -81,6 +91,17 @@ export default function ProfileEditor({ user }) {
                 className="w-full border rounded-lg px-3 py-3 focus:ring-2 focus:ring-blue-500"
                 value={lastName}
                 onChange={(e) => setlastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                className="w-full border rounded-lg px-3 py-3 focus:ring-2 focus:ring-blue-500"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
 
@@ -136,7 +157,7 @@ export default function ProfileEditor({ user }) {
 
               <input
                 type="text"
-                className="flex-1 min-w-[120px] outline-none"
+                className="flex-1 min-w-30 outline-none"
                 value={input}
                 onKeyDown={handleKeyDown}
                 placeholder="Type a skill and press Enter"
