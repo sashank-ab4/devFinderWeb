@@ -4,6 +4,7 @@ import axios from "axios";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import PhotoUploadSection from "./PhotoUpload";
 
 export default function ProfileEditor({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -168,24 +169,17 @@ export default function ProfileEditor({ user }) {
                 placeholder="Type a skill and press Enter"
                 onChange={(e) => setInput(e.target.value)}
               />
-              <p
-                className={`text-sm ${skills.length > 5 ? "text-red-500" : "text-gray-300"}  `}
-              >
-                * You can add upto 5 key Skills
-              </p>
             </div>
+            <p
+              className={`text-sm ${skills.length > 5 ? "text-red-500" : "text-gray-300"}   `}
+            >
+              * You can add only upto 5 key Skills
+            </p>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Photo URL
-              </label>
+              <label className="block text-sm font-medium mb-1">Photo</label>
 
-              <input
-                type="text"
-                className="w-full border rounded-lg px-3 py-3 focus:ring-2 focus:ring-blue-500"
-                value={photoUrl}
-                onChange={(e) => setPhotoUrl(e.target.value)}
-              />
+              <PhotoUploadSection setPhotoUrl={setPhotoUrl} />
             </div>
             {error && (
               <div role="alert" className="alert alert-error alert-soft">
