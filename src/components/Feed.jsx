@@ -19,7 +19,7 @@ export default function Feed() {
 
       feedUpdater(addFeed(res?.data?.data));
     } catch (err) {
-      console.err(err.message);
+      console.error(err.message);
     }
   };
 

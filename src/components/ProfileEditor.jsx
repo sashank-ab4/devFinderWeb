@@ -16,6 +16,8 @@ export default function ProfileEditor({ user }) {
   const [about, setAbout] = useState(user.about || "");
   const [photoUrl, setPhotoUrl] = useState(user?.photoUrl);
   const [toast, setToast] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const saveEditUpdaterFunction = useDispatch();
   const addSkill = (e) => {
@@ -34,6 +36,7 @@ export default function ProfileEditor({ user }) {
 
   const handleEdit = async () => {
     try {
+      setLoading(true);
       const res = await axios.patch(
         BASE_BACKEND_URL + "/profile/edit",
         {
@@ -54,8 +57,13 @@ export default function ProfileEditor({ user }) {
       setTimeout(() => {
         setToast(false);
       }, 5000);
-    } catch (error) {
-      console.error(error.message);
+    } catch (err) {
+      setError(err?.response?.data?.message || "Something went wrong!");
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -179,13 +187,21 @@ export default function ProfileEditor({ user }) {
                 onChange={(e) => setPhotoUrl(e.target.value)}
               />
             </div>
-
-            <button
-              onClick={handleEdit}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-            >
-              Save Changes
-            </button>
+            {error && (
+              <div role="alert" className="alert alert-error alert-soft">
+                <span>{error}</span>
+              </div>
+            )}
+            {loading ? (
+              <span className="loading loading-spinner loading-secondary"></span>
+            ) : (
+              <button
+                onClick={handleEdit}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition cursor-pointer"
+              >
+                Save Changes
+              </button>
+            )}
           </div>
         </div>
 
