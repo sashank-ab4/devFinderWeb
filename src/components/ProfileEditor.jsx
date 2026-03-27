@@ -186,16 +186,26 @@ export default function ProfileEditor({ user }) {
                 <span>{error}</span>
               </div>
             )}
-            {loading ? (
-              <span className="loading loading-spinner loading-secondary"></span>
-            ) : (
-              <button
-                onClick={handleEdit}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-              >
-                Save Changes
-              </button>
-            )}
+            <button
+              onClick={handleEdit}
+              disabled={loading}
+              className={`w-full flex justify-center items-center gap-2 
+    py-3 rounded-lg transition 
+    ${
+      loading
+        ? "bg-blue-400 cursor-not-allowed"
+        : "bg-blue-600 hover:bg-blue-700 cursor-pointer text-white"
+    }`}
+            >
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Saving...
+                </>
+              ) : (
+                "Save Changes"
+              )}{" "}
+            </button>
           </div>
         </div>
 

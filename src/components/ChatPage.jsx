@@ -16,6 +16,7 @@ export default function MessageFeed() {
   const userId = user?._id;
   const navigate = useNavigate();
   const endTextsRef = useRef(null);
+  const socketRef = useRef(null);
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_BACKEND_URL + "/chat/" + textingUserId, {
       withCredentials: true,
@@ -48,26 +49,26 @@ export default function MessageFeed() {
     if (!userId) {
       return;
     }
-    const socket = createSocketConnection();
+    socketRef.current = createSocketConnection();
     // as page loads, the socket connection is made and this will emit the event : joinChat
-    socket.emit("joinChat", {
+    socketRef.current.emit("joinChat", {
       firstName: user.firstName,
       userId,
       textingUserId,
     });
 
-    socket.on("messageReceived", (newMessage) => {
+    socketRef.current.on("messageReceived", (newMessage) => {
       setMessages((messages) => [...messages, newMessage]);
     });
     // clean up function
     return () => {
-      socket.disconnect();
+      socketRef.current.disconnect();
     };
   }, [userId, textingUserId]);
 
   const handleSendMessage = () => {
-    const socket = createSocketConnection();
-    socket.emit("sendMessage", {
+    if (!socketRef.current) return;
+    socketRef.current.emit("sendMessage", {
       firstName: user.firstName,
       lastName: user.lastName,
       text: latestMessage,
@@ -77,14 +78,16 @@ export default function MessageFeed() {
     setLatestMessage("");
   };
   useEffect(() => {
-    endTextsRef.current?.scrollIntoView({ behavior: "smooth" });
+    endTextsRef.current?.scrollIntoView({
+      behavior: messages.length > 1 ? "smooth" : "auto",
+    });
   }, [messages]);
   return (
     <>
       <div
         className="
       flex flex-col
-      h-screen sm:h-[90vh]
+      min-h-screen sm:h-[90vh]
       w-full sm:max-w-2xl
       mx-auto
       border sm:rounded-xl
@@ -127,12 +130,12 @@ export default function MessageFeed() {
         </div>
 
         <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2">
-          {messages.map((msg, index) => {
+          {messages.map((msg) => {
             const isMe = user?._id === msg?.senderId?._id;
 
             return (
               <div
-                key={index}
+                key={msg?._id || msg?.createdAt}
                 className={`chat ${isMe ? "chat-end" : "chat-start"}`}
               >
                 <div className="chat-image avatar">
@@ -149,7 +152,7 @@ export default function MessageFeed() {
                   </div>
                 </div>
                 <div className="chat-header text-[10px] sm:text-xs opacity-70">
-                  {msg?.senderId?.firstName}
+                  {isMe ? "You" : msg?.senderId?.firstName}
                 </div>
                 <div className="chat-bubble text-sm sm:text-base">
                   {msg?.text}
@@ -182,6 +185,7 @@ export default function MessageFeed() {
           />
 
           <button
+            disabled={!latestMessage.trim()}
             onClick={handleSendMessage}
             className="btn btn-primary px-3 sm:px-4"
           >
