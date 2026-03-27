@@ -148,11 +148,9 @@ export default function MessageFeed() {
                     />
                   </div>
                 </div>
-
                 <div className="chat-header text-[10px] sm:text-xs opacity-70">
                   {msg?.senderId?.firstName}
                 </div>
-
                 <div className="chat-bubble text-sm sm:text-base">
                   {msg?.text}
                 </div>

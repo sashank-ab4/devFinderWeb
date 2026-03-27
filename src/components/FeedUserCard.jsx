@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeProfileFromFeed } from "../utils/feedSlice";
 
-export default function FeedUserCard({ user }) {
+export default function FeedUserCard({ user, disableFunctionality }) {
   const { _id, firstName, lastName, about, skills } = user;
   const dispatch = useDispatch();
   const handleRequestsFromFeed = async (status, userId) => {
@@ -59,14 +59,16 @@ export default function FeedUserCard({ user }) {
         <div className="flex gap-3 mt-4">
           <button
             onClick={() => handleRequestsFromFeed("ignored", _id)}
-            className="flex-1 py-2 cursor-pointer rounded-lg bg-gray-200 text-gray-700 text-sm font-medium"
+            disabled={disableFunctionality}
+            className={`flex-1 py-2 rounded-lg ${disableFunctionality ? `bg-gray-200 text-gray-700 text-sm font-medium cursor-not-allowed opacity-50` : `bg-gray-200 hover:bg-gray-300 cursor-pointer`} `}
           >
             Ignore
           </button>
 
           <button
             onClick={() => handleRequestsFromFeed("interested", _id)}
-            className="flex-1 py-2 cursor-pointer rounded-lg bg-blue-600 text-white text-sm font-medium"
+            disabled={disableFunctionality}
+            className={`flex-1 py-2  rounded-lg ${disableFunctionality ? `bg-blue-400 cursor-not-allowed opacity-50` : `bg-blue-600 text-white text-sm font-medium cursor-pointer`} `}
           >
             Interested
           </button>

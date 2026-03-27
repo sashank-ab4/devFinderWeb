@@ -201,8 +201,13 @@ export default function ProfileEditor({ user }) {
 
         <div className="flex items-start justify-center">
           <div className="w-full max-w-sm">
+            <div className=" flex justify-center p-9 tracking-wide text-2xl font-semibold">
+              <p>Preview</p>
+            </div>
+
             <FeedUserCard
               user={{ firstName, lastName, about, photoUrl, skills }}
+              disableFunctionality={true}
             />
           </div>
         </div>
