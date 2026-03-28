@@ -64,8 +64,14 @@ export default function Login() {
         { emailId },
         { withCredentials: true },
       );
-
-      window.open(response?.data?.resetLink, "_self");
+      const url = response?.data?.resetLink;
+      console.log("url:", url);
+      if (!url) {
+        alert("Reset Link missing!");
+        return;
+      }
+      const path = new URL(url).pathname;
+      navigate(path);
     } catch (err) {
       alert(err?.response?.data || "Error Sending Link!");
     }
