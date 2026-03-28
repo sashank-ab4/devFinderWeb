@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Provider store={appStore}>
-        <BrowserRouter basename="/">
+        <BrowserRouter>
           <Suspense
             fallback={
               <div className="flex justify-center items-center h-screen">
