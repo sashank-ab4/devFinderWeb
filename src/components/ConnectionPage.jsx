@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { BASE_BACKEND_URL } from "../utils/mockData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +9,10 @@ import { TbMessage } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
 
 export default function Connections() {
+  const [expandProfile, setExpandProfile] = useState(null);
   const connectionAdderFunction = useDispatch();
   const myConnections = useSelector((store) => store.connection);
+  console.log(myConnections);
   const fetchConnections = async () => {
     try {
       const response = await axios.get(BASE_BACKEND_URL + "/user/connections", {
@@ -43,8 +46,16 @@ export default function Connections() {
 
       <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
         {myConnections.map((connection) => {
-          const { photoUrl, firstName, lastName, about, skills, _id } =
-            connection;
+          const {
+            photoUrl,
+            firstName,
+            lastName,
+            about,
+            skills,
+            _id,
+            phoneNumber,
+            emailId,
+          } = connection;
 
           return (
             <div
@@ -88,10 +99,30 @@ export default function Connections() {
                     ))}
                   </div>
                 )}
+
+                {expandProfile === _id && (
+                  <div className="mt-3 text-sm text-gray-600 space-y-1">
+                    <p>
+                      <span className="font-medium">
+                        📧: {emailId || "Not Available"}
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-medium">
+                        📱: {phoneNumber || "Not Available"}
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-start">
                 <div className="tooltip tooltip-bottom" data-tip="View Profile">
-                  <button className="btn btn-soft btn-primary ">
+                  <button
+                    onClick={() =>
+                      setExpandProfile(expandProfile === _id ? null : _id)
+                    }
+                    className="btn btn-soft btn-primary  "
+                  >
                     <CgProfile size={24} />
                   </button>
                 </div>

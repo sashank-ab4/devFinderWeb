@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import { BASE_BACKEND_URL } from "../utils/mockData";
-export default function PhotoUploadSection({ setPhotoUrl }) {
+export default function PhotoUploadSection({ setPhotoUrl, setPreviewUrl }) {
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const previewUrl = URL.createObjectURL(file);
-    setPhotoUrl(previewUrl);
+    const preview = URL.createObjectURL(file);
+    setPreviewUrl(preview);
     const formData = new FormData();
     formData.append("photo", file);
     try {

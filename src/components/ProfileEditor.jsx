@@ -16,6 +16,7 @@ export default function ProfileEditor({ user }) {
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   const [photoUrl, setPhotoUrl] = useState(user?.photoUrl);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [toast, setToast] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -38,6 +39,11 @@ export default function ProfileEditor({ user }) {
   const handleEdit = async () => {
     try {
       setLoading(true);
+      if (photoUrl?.startsWith("blob:")) {
+        setError("Image is uploading, please wait....");
+        setLoading(false);
+        return;
+      }
       const res = await axios.patch(
         BASE_BACKEND_URL + "/profile/edit",
         {
@@ -179,7 +185,10 @@ export default function ProfileEditor({ user }) {
             <div>
               <label className="block text-sm font-medium mb-1">Photo</label>
 
-              <PhotoUploadSection setPhotoUrl={setPhotoUrl} />
+              <PhotoUploadSection
+                setPhotoUrl={setPhotoUrl}
+                setPreviewUrl={setPreviewUrl}
+              />
             </div>
             {error && (
               <div role="alert" className="alert alert-error alert-soft">
@@ -216,7 +225,13 @@ export default function ProfileEditor({ user }) {
             </div>
 
             <FeedUserCard
-              user={{ firstName, lastName, about, photoUrl, skills }}
+              user={{
+                firstName,
+                lastName,
+                about,
+                photoUrl: previewUrl || photoUrl,
+                skills,
+              }}
               disableFunctionality={true}
             />
           </div>
