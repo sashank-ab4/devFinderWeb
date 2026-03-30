@@ -1,7 +1,11 @@
 import io from "socket.io-client";
-import { BASE_BACKEND_URL } from "./mockData";
+
 export const createSocketConnection = () => {
-  return io(BASE_BACKEND_URL, {
+  const SOCKET_URL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:4444"
+      : "https://www.devtribe.online";
+  return io(SOCKET_URL, {
     withCredentials: true,
     transports: ["websocket", "polling"],
   });

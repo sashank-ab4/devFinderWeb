@@ -12,7 +12,7 @@ export default function Connections() {
   const [expandProfile, setExpandProfile] = useState(null);
   const connectionAdderFunction = useDispatch();
   const myConnections = useSelector((store) => store.connection);
-  console.log(myConnections);
+
   const fetchConnections = async () => {
     try {
       const response = await axios.get(BASE_BACKEND_URL + "/user/connections", {
