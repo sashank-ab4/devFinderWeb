@@ -87,7 +87,7 @@ export default function MessageFeed() {
       <div
         className="
       flex flex-col
-      min-h-screen sm:h-[90vh]
+      h-screen sm:h-[90vh]
       w-full sm:max-w-2xl
       mx-auto
       border sm:rounded-xl
