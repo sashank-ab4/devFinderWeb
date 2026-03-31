@@ -21,7 +21,7 @@ export default function Connections() {
 
       connectionAdderFunction(addConnection(response?.data?.data));
     } catch (err) {
-      console.err("ERROR:" + err.message);
+      console.error("ERROR:", err.message);
     }
   };
   useEffect(() => {

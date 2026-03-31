@@ -65,7 +65,7 @@ export default function Login() {
         { withCredentials: true },
       );
       const url = response?.data?.resetLink;
-      console.log("url:", url);
+
       if (!url) {
         alert("Reset Link missing!");
         return;

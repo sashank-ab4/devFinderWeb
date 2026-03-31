@@ -18,7 +18,7 @@ export default function Requests() {
 
       requestUpdaterFunction(addRequest(response?.data?.data)); // always res.data here orelse will redux will throw error
     } catch (err) {
-      console.error("ERROR:" + err.message);
+      console.error("ERROR:", err.message);
     }
   };
   const reviewRequests = async (status, _id) => {
