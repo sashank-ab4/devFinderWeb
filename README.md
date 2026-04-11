@@ -1,41 +1,198 @@
-# DevFinder
+## DevTribe
+**Live App:**  [devtribe.online](https://devtribe.online)
 
-## basic initializations
+A full-stack social networking platform built with React, Express, and MongoDB, deployed on AWS EC2 with Nginx and secured using HTTPS.
 
-- created a VITE + React Project
-- created one git repo and pushed my code to main branch
-- removed unneccesary code and made it clean for to start
-- installed tailwind css using -- npm install tailwindcss @tailwindcss/vite
-- installed daisyUI @ npm i -D daisyui@latest and changed the config files accordingly.
-- installed react-router using @ npm i react-router-dom
+## Project Structure
+# Frontend
 
-## Day 2
+```
+devFinder-web
 
-- Building LoginPage
-- installed axios @ npm i axios
-- read more about the cors error and for now overcomed with cors middleware, npm package given and suggested by express.js
-- installed cors npm package @ npm i cors and called it at root level file (app.js) in Backend code
-- installed redux toolkit which is standardized and simplified way to write redux logic. Using npm install @reduxjs/toolkit react-redux
-- designed the component to update dynamically using useSelector (from redux) and redirecting to feed page using useNavigate(from react-router-dom)
-- made login button, when clicked it will take me to login page
-- when logged in, login will turn to welcome with name message with profile
+├── public  
+│   └── Static assets (favicons, images)
 
-## Day 3 (12/03)
+├── src  
 
-- you should not access other routes if you are not logged in!
-- if token is not present, redirect the user to login page!
-- logout feature and error handling
-- when we logged out, redirecting back to home page, developed using navigate("/") hook.
-- built user profile card which would be visible to others
-- built user profile details updation
-- toast message when updates are saved
+│   ├── assets  
+│   │   └── Images and UI media resources  
 
-## Day 4 (13/03)
+│   ├── components  
+│   │   ├── Navbar, Footer  
+│   │   ├── Feed, FeedUserCard  
+│   │   ├── LoginPage, ResetPasswordPage  
+│   │   ├── ProfileView, ProfileEditor  
+│   │   ├── ConnectionPage, RequestsPage  
+│   │   ├── ChatPage  
+│   │   └── ErrorPage  
 
-# Deployment
+│   ├── layout  
+│   │   ├── MainBody (App layout wrapper)  
+│   │   ├── HeroSection (Landing section)  
+│   │   └── MiddleSection (Content section)  
 
-- Backend
-  - enter the server with the key - ssh -i "devTribe-secret.pem" ubuntu@ec2-13-233-223-94.ap-south-1.compute.amazonaws.com
-  - list the folders and then cd to backend file/folder - my-backend
-  - npm install, which will install all the packages and dependencies
-  - pm2 main command -pm2 start src/app.js --name devTribe-backend
+│   ├── utils  
+│   │   ├── appStore (Redux store setup)  
+│   │   ├── userSlice (User state)  
+│   │   ├── feedSlice (Feed state)  
+│   │   ├── connectionSlice (Connections state)  
+│   │   ├── requestSlice (Requests state)  
+│   │   ├── socket (Real-time communication)  
+│   │   └── mockData (Base API config)  
+
+│   ├── App.jsx (Root component)  
+│   ├── main.jsx (Application entry point)  
+│   └── index.css (Global styles)  
+```
+# Backend
+
+
+```
+backend
+
+├── src  
+
+│   ├── app.js  
+│   │   └── Main server entry point  
+
+│   ├── config  
+│   │   └── database.js (Database connection setup)  
+
+│   ├── middlewares  
+│   │   ├── auth.js (Authentication middleware)  
+│   │   └── upload.js (File upload handling)  
+
+│   ├── models  
+│   │   ├── user.js  
+│   │   ├── chats.js  
+│   │   └── connectionRequest.js  
+│   │   └── (MongoDB schemas)  
+
+│   ├── routes  
+│   │   ├── auth.js (Authentication routes)  
+│   │   ├── profile.js (User profile APIs)  
+│   │   ├── request.js (Connection requests)  
+│   │   ├── users.js (User-related APIs)  
+│   │   └── texts.js (Messaging APIs)  
+
+│   ├── utils  
+│   │   ├── cloudinary.js (Image upload service)  
+│   │   ├── socket.js (Real-time communication)  
+│   │   └── validation.js (Input validation)  
+```
+##  Getting Started
+
+Follow these steps to set up the project locally.
+
+###  Clone the Repository
+
+```bash
+git clone https://github.com/sashank-ab4/devFinderWeb.git
+git clone https://github.com/sashank-ab4/my-backend.git
+```
+
+---
+
+###  Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+###  Environment Variables
+
+Create a `.env` file using the example:
+
+```bash
+cp .env.example .env
+```
+
+Update the values inside `.env` with your credentials.
+
+---
+
+###  Start Backend
+
+```bash
+npm start
+```
+
+---
+
+###  Frontend Setup
+
+```bash
+cd devFinder-web
+npm install
+npm run dev
+```
+
+---
+
+###  Access the App
+
+- Frontend: http://localhost:5173  
+- Backend: http://localhost:4444
+
+##  Tech Stack
+
+###  Frontend
+- React.js (Vite)
+- Tailwind CSS
+- Redux Toolkit
+- React Router
+- Axios
+
+###  Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication (Cookie-based)
+- Socket.IO (Real-time communication)
+
+###  Deployment & DevOps
+- AWS EC2
+- Nginx (Reverse Proxy)
+- PM2 (Process Manager)
+- Certbot (HTTPS / SSL)
+- Git & GitHub
+
+###  Other Tools
+- Cloudinary (Image uploads)
+- Postman (API testing)
+##  Features
+
+###  Authentication & Security
+- Secure user authentication using JWT (cookie-based)
+- Protected routes with session handling
+- Password reset functionality
+
+###  User Profiles
+- Create and manage user profiles
+- Edit profile details and upload profile images
+- View other users profiles
+
+###  Connections System
+- Send, accept, and reject connection requests
+- Manage incoming and outgoing requests
+- View your network of connections
+
+###  Feed System
+- Discover other users on the platform
+- Dynamic feed powered by backend APIs
+- Real-time updates with efficient state management
+
+###  Responsive UI
+- Fully responsive design across devices
+- Clean and modern UI built with Tailwind CSS
+
+###  Offline Detection
+- Detects network status in real-time
+- Displays a custom offline screen with retry option
+
+###  Deployment & Performance
+- Deployed on AWS EC2 with Nginx reverse proxy
+- Managed backend processes using PM2
+- Secured with HTTPS using Certbot
+  
